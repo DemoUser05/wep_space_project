@@ -1,4 +1,10 @@
 const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json"); // переконайся, що файл існує
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
 const db = admin.firestore();
 
 // Функція для отримання кораблів
