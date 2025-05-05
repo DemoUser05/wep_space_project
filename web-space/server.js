@@ -8,6 +8,8 @@ const app = express();
 const PORT = 5000;
 const SECRET_KEY = "your-secret-key";
 const { getShips, addShip } = require("./firebaseFunctions");
+const { getUserExpeditions, addExpedition } = require("./firebaseFunctions");
+
 
 
 const users = []; // Тимчасове сховище користувачів
