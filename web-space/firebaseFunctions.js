@@ -27,4 +27,18 @@ const addShip = async (name, type, capacity) => {
   return docRef.id;
 };
 
-module.exports = { getShips, addShip };
+// ✅ Отримати список місій
+const getUserExpeditions = async () => {
+  const missions = [];
+  const querySnapshot = await db.collection("missions").get();
+  querySnapshot.forEach((doc) => missions.push({ id: doc.id, ...doc.data() }));
+  return missions;
+};
+
+// ✅ Додати нову місію
+const addExpedition = async (missionData) => {
+  const docRef = await db.collection("missions").add(missionData);
+  return docRef.id;
+};
+
+module.exports = { getShips, addShip, getUserExpeditions, addExpedition };

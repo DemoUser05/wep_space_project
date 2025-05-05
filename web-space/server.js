@@ -97,6 +97,27 @@ app.post("/api/ships", async (req, res) => {
   }
 });
 
+// ✅ Отримання всіх місій з Firebase
+app.get("/api/missions", async (req, res) => {
+  try {
+    const missions = await getUserExpeditions(); // Функція Firestore
+    res.json(missions);
+  } catch (error) {
+    res.status(500).json({ message: "Помилка завантаження місій", error: error.message });
+  }
+});
+
+// ✅ Додавання нової місії у Firebase
+app.post("/api/missions", async (req, res) => {
+  try {
+    const { name, startTime, destination, type, difficulty, duration } = req.body;
+    await addExpedition({ name, startTime, destination, type, difficulty, duration });
+    res.json({ message: "Місія успішно збережена!" });
+  } catch (error) {
+    res.status(500).json({ message: "Помилка збереження місії", error: error.message });
+  }
+});
+
 // Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер запущено на http://localhost:${PORT}`);
