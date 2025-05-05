@@ -108,6 +108,19 @@ export default {
     //new
     const auth = getAuth();
 
+// ✅ Функція для отримання місій із серверного API
+    const fetchMissions = async () => {
+      try {
+        const response = await fetch("https://wep-space-project.onrender.com/api/mission");
+        if (!response.ok) throw new Error("Помилка при отриманні місій");
+        const data = await response.json();
+        console.log("Отримані місії з API:", data);
+        missions.value = data;
+      } catch (error) {
+        console.error("Помилка завантаження місій:", error.message);
+      }
+    };  
+
   const loadExpeditions = async () => {
   const user = auth.currentUser;
   if (user) {
@@ -157,6 +170,7 @@ export default {
 
     // Використання onMounted
     onMounted(() => {
+      fetchMissions();
       loadExpeditions();
     });
 
@@ -170,6 +184,7 @@ export default {
       isAuthenticated,
       addNewExpedition,
       redirectToLogin,
+      fetchMissions,
     };
   },
 };

@@ -2,7 +2,6 @@
   <div class="app-container">
     <header>
       <h1>Симулятор космічної експедиції</h1>
-      /*<MessageDisplay />*/
       <nav class="navigation-bar">
         <router-link to="/" class="nav-item">Про симулятор</router-link>
         <router-link to="/ship" class="nav-item">Космічний корабель</router-link>
